@@ -84,7 +84,7 @@ tic
     %compute control gain based on lqr
     %tau(:,count) = lqr_gain_discrete*state_x;
     err(:,count) = q_ref-data(:,count);
-    tau(:,count)=calcPID(err,cfg.PID.Kp1,cfg.PID.Kp2,cfg.PID.Ki1,cfg.PID.Ki2);
+    tau(:,count)=calcPID(err,Ts,cfg.PID);
     tau1 = tau(1,count);
     tau2 = tau(2,count);
     %convert torque into PWM

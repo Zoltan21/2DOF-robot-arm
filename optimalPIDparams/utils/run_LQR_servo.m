@@ -5,12 +5,12 @@
 
 %% model data initialization
 cfg.Ts = 0.045;
-cfg.x = [0 0 0 0]';
+
 % cfg.ref = [ones(1,90)*1, ones(1,90)*(-1),ones(1,90)*0.5
 %         ones(1,70)*(-0.5), ones(1,70)*(0.7),ones(1,70)*(-0.3),ones(1,60)*(-1)];
-q_ref_track = [ones(1,90)*0.3, ones(1,90)*(-0.3),ones(1,90)*0.3
-        ones(1,70)*(-0.3), ones(1,70)*(0.3),ones(1,70)*(-0.3),ones(1,60)*(-1)];
-
+load referenceTraj
+cfg.ref = q_ref;
+cfg.x = [cfg.ref(1,1) cfg.ref(2,1) 0 0]';
 % cfg.ref = [ones(1,270)*1
 %         ones(1,270)*(-0.5)];
 cfg.u= [0;0];
@@ -22,10 +22,12 @@ cfg.PID.Kp1 = res(1);
 cfg.PID.Kp2 = res(2);
 cfg.PID.Ki1 = res(3);
 cfg.PID.Ki2 = res(4);
+cfg.PID.Kd1 = res(5);
+cfg.PID.Kd2 = res(6);
 %% simulation process
 for i =1:cfg.N
     cfg.e(:,i+1) = cfg.ref(:,i)-cfg.x(1:2,i);
-    cfg.u(:,i) = calcPID(cfg.e,cfg.PID.Kp1,cfg.PID.Kp2,cfg.PID.Ki1,cfg.PID.Ki2);
+    cfg.u(:,i) = calcPID(cfg.e,cfg.Ts,cfg.PID);
     cfg.x(:,i+1)= MyModel(cfg.x(:,i),cfg.u(:,i));
 end
 
