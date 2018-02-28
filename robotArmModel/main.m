@@ -2,8 +2,7 @@
 %commented and we want to run just a particular part of the script
 %%-------------------------------------------------------------------------
 %SET FLAG
-%[5 and 6 joints]/[6 and 7 joints]
-%if 5 and 6 joint then 1
+%this should be set for 1, in order to get the right parameters
 global joint56
 joint56=1;
 %for the discrete-time linear model, you have to set the sampling time

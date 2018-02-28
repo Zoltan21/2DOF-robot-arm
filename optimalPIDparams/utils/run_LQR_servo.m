@@ -8,7 +8,7 @@ cfg.Ts = 0.045;
 
 % cfg.ref = [ones(1,90)*1, ones(1,90)*(-1),ones(1,90)*0.5
 %         ones(1,70)*(-0.5), ones(1,70)*(0.7),ones(1,70)*(-0.3),ones(1,60)*(-1)];
-load referenceTraj
+load referenceTraj2
 cfg.ref = q_ref;
 cfg.x = [cfg.ref(1,1) cfg.ref(2,1) 0 0]';
 % cfg.ref = [ones(1,270)*1
@@ -52,4 +52,16 @@ set(gca,'FontSize',20);
 xlabel('Time [s]');
 ylabel('Angles [rad]')
 xlim([0 12.20]);
+
+%% plot references
+figure
+plot(t,q_ref(1,:), 'r--',t,q_ref(2,:),'b','LineWidth',1.7);
+grid;
+h_legend=legend('$q_{1ref}$','$q_{2ref}$' ,2);
+set(h_legend,'FontSize',20,'Interpreter','latex');
+set(gca,'FontSize',20);
+xlabel('Time [s]');
+ylabel('Angles [rad]')
+xlim([0 12.20]);
+%
 
